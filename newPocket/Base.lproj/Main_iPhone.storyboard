@@ -184,7 +184,13 @@
         <scene sceneID="2aL-BY-GMg">
             <objects>
                 <tabBarController definesPresentationContext="YES" id="BE6-sG-zOT" customClass="JourneyController" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="nI5-hF-b8i"/>
+                    <navigationItem key="navigationItem" id="nI5-hF-b8i">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="hrF-bg-JfO">
+                            <connections>
+                                <action selector="clikeEditJourneyStateButton:" destination="BE6-sG-zOT" id="CYe-8I-VmC"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="cME-4y-8jJ">
                         <rect key="frame" x="129" y="330" width="163" height="49"/>
@@ -192,6 +198,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
+                        <outlet property="editJourneyStateButton" destination="hrF-bg-JfO" id="Rhj-7p-oCJ"/>
                         <segue destination="Tdm-V2-oX1" kind="relationship" relationship="viewControllers" id="1ma-0B-IDP"/>
                         <segue destination="BHe-du-jIg" kind="relationship" relationship="viewControllers" id="h25-ax-sfW"/>
                     </connections>

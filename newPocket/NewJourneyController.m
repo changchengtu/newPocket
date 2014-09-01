@@ -51,9 +51,9 @@
         
         // 檢查插入資料是否成功
         if (sqlite3_step(statement) == SQLITE_DONE) {
-            NSLog(@"成功插入一筆資料");
+            NSLog(@"NewJourneyController: 成功插入一筆資料");
         } else {
-            NSLog(@"插入一筆資料失敗");
+            NSLog(@"NewJourneyController: 插入一筆資料失敗");
         }
         
         // 使用完畢，釋放statement

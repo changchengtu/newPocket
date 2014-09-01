@@ -13,6 +13,7 @@
 @end
 
 @implementation JourneyController
+@synthesize editJourneyStateButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -30,14 +31,19 @@
     
     NSNumber *yes = [NSNumber numberWithInteger:1];
     NSInteger yesCheck = [yes integerValue];
+    
+    self.navigationItem.rightBarButtonItem = self.editJourneyStateButton;
 
     
     if (travelingCheck==yesCheck) {
-        NSLog(@"this journey is on going, redirect to record tab");
+        NSLog(@"JourneyController: this journey is on going, redirect to record tab");
         [self setSelectedIndex: 0];
+        self.navigationItem.rightBarButtonItem.title = @"on";
     } else{
-        NSLog(@"this journey is not on going, redirect to timeline tab");
+        NSLog(@"JourneyController: this journey is not on going, redirect to timeline tab");
         [self setSelectedIndex: 1];
+        self.navigationItem.rightBarButtonItem.title = @"off";
+
     }
 
     [super viewDidLoad];
@@ -55,6 +61,64 @@
     receiveJourney = state;
     
 }
+
+- (IBAction)clikeEditJourneyStateButton:(id)sender {
+    // 取得已開啓的資料庫連線變數
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    sqlite3 *db = [delegate getDB];
+    
+    NSNumber *iid = [receiveJourney objectForKey:@"iid"];
+    NSInteger *iidInt = [iid integerValue];
+    
+    NSString *updateSQL;
+    
+    if ([self.navigationItem.rightBarButtonItem.title isEqualToString:@"on"])
+    {
+        self.navigationItem.rightBarButtonItem.title= @"off";
+        
+        if (db != nil) {
+            // 準備好查詢的SQL command
+            updateSQL = [NSString stringWithFormat:@"UPDATE journey SET traveling=0 WHERE ID=%d;", (int *)iidInt];
+        }
+        
+    } else{
+        self.navigationItem.rightBarButtonItem.title= @"on";
+        
+        if (db != nil) {
+            // 準備好查詢的SQL command
+            updateSQL = [NSString stringWithFormat:@"UPDATE journey SET traveling=1 WHERE ID=%d;", (int *)iidInt];
+            
+        }
+        
+    }
+    
+    // code sql query
+    const char *sql = [updateSQL UTF8String];
+    // statement用來儲存執行結果
+    sqlite3_stmt *statement;
+    sqlite3_prepare(db, sql, -1, &statement, NULL);
+    
+    if (sqlite3_step(statement) == SQLITE_DONE) {
+        NSLog(@"JourneyController: edit success");
+    } else {
+        NSLog(@"JourneyController: edit fail");
+    }
+    
+    // 使用完畢，釋放statement
+    sqlite3_finalize(statement);
+    
+    // edit receiveJourney for the edition of journey data
+    if ([self.navigationItem.rightBarButtonItem.title isEqualToString:@"on"]) {
+        [receiveJourney setObject:@"1" forKey:@"onGoing"];
+    } else{
+        [receiveJourney setObject:@"0" forKey:@"onGoing"];
+    }
+    
+
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"refresh" object:nil];
+}
+
 
 /*
 #pragma mark - Navigation

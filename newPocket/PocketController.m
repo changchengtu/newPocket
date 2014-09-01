@@ -39,49 +39,8 @@
     
     journeyList = [[NSMutableArray alloc] init]; //List all journey on Pocket page
     
-    // 取得已開啓的資料庫連線變數
-    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    sqlite3 *db = [delegate getDB];
-    
-    if (db != nil) {
-        // 準備好查詢的SQL command
-        const char *sql = "SELECT * FROM journey";
-        // statement用來儲存執行結果
-        sqlite3_stmt *statement;
-        sqlite3_prepare(db, sql, -1, &statement, NULL);
-        
-        // 利用迴圈取出查詢NSMutableDictionary *mutableDict = [dictionary mutableCopy];
-        while (sqlite3_step(statement) == SQLITE_ROW) {
-            char *iid = (char *)sqlite3_column_text(statement, 0);
-            char *name = (char *)sqlite3_column_text(statement, 1);
-            char *country = (char *)sqlite3_column_text(statement, 2);
-            char *city = (char *)sqlite3_column_text(statement, 3);
-            char *start = (char *)sqlite3_column_text(statement, 4);
-            char *end = (char *)sqlite3_column_text(statement, 5);
-            char *description = (char *)sqlite3_column_text(statement, 6);
-            char *profilepic = (char *)sqlite3_column_text(statement, 7);
-            char *traveling = (char *)sqlite3_column_text(statement, 8);
-            
-            
-            journeyInfoDict = [[NSMutableDictionary alloc] init];
-            [journeyInfoDict setObject:[NSString stringWithFormat:@"%s", iid, nil] forKey:@"iid"];
-            [journeyInfoDict setObject:[NSString stringWithFormat:@"%s", name, nil] forKey:@"name"];
-            [journeyInfoDict setObject:[NSString stringWithFormat:@"%s", country, nil] forKey:@"country"];
-            [journeyInfoDict setObject:[NSString stringWithFormat:@"%s", city, nil] forKey:@"city"];
-            [journeyInfoDict setObject:[NSString stringWithFormat:@"%s", start, nil] forKey:@"start"];
-            [journeyInfoDict setObject:[NSString stringWithFormat:@"%s", end, nil] forKey:@"end"];
-            [journeyInfoDict setObject:[NSString stringWithFormat:@"%s", description, nil] forKey:@"description"];
-            [journeyInfoDict setObject:[NSString stringWithFormat:@"%s", profilepic, nil] forKey:@"profilepic"];
-            [journeyInfoDict setObject:[NSString stringWithFormat:@"%s", traveling, nil] forKey:@"traveling"];
-            
-            [journeyList addObject:journeyInfoDict];
-            
-            // NSLog([NSString stringWithFormat:@"%s", traveling, nil]);
-
-        }
-        
-        sqlite3_finalize(statement);
-    }
+    // get the newest journey list
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"refresh" object:nil];
 
 }
 
@@ -98,9 +57,7 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:indicator];
     }
-    NSLog(@"ready to load data to a cell");
     cell.textLabel.text = [[journeyList objectAtIndex:indexPath.row] objectForKey:@"name"];
-    NSLog(@"cell has loaded data");
     
     return cell;
 }
@@ -122,16 +79,18 @@
     // to get if the journey is on going, and pass variable to next controller
     if (indexPath.row > -1)
 	{
-        NSLog(@"check the journeyState");
+        NSLog(@"PocketController: check the journeyState");
         // check if user is on journey
         if (travelingCheck==yesCheck) {
             NSString *state = @"1";
             //NSLog(@"yes");
             [passJourney setObject:state forKey:@"onGoing"];
+            [passJourney setObject:[[journeyList objectAtIndex:indexPath.row] objectForKey:@"iid"] forKey:@"iid"];
         } else{
             //NSLog(@"no");
             NSString *state = @"0";
             [passJourney setObject:state forKey:@"onGoing"];
+            [passJourney setObject:[[journeyList objectAtIndex:indexPath.row] objectForKey:@"iid"] forKey:@"iid"];
         }
     }
     [self performSegueWithIdentifier:@"showJourney" sender:self];
@@ -145,7 +104,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    NSLog(@"do the segue");
+    NSLog(@"PocketController: do the segue");
     //addToCartViewContollerForItem
     if([[segue identifier] isEqualToString:@"showJourney"]){
         NSIndexPath *selectedRow = [[self tableView] indexPathForSelectedRow];
@@ -196,13 +155,26 @@
             [journeyInfoDict setObject:[NSString stringWithFormat:@"%s", profilepic, nil] forKey:@"profilepic"];
             [journeyInfoDict setObject:[NSString stringWithFormat:@"%s", traveling, nil] forKey:@"traveling"];
             
+            // for test sqlite connection
+            /*
+            NSLog([journeyInfoDict objectForKey:@"iid"]);
+            NSLog([journeyInfoDict objectForKey:@"name"]);
+            NSLog([journeyInfoDict objectForKey:@"country"]);
+            NSLog([journeyInfoDict objectForKey:@"city"]);
+            NSLog([journeyInfoDict objectForKey:@"start"]);
+            NSLog([journeyInfoDict objectForKey:@"end"]);
+            NSLog([journeyInfoDict objectForKey:@"description"]);
+            NSLog([journeyInfoDict objectForKey:@"profilepic"]);
+            NSLog([journeyInfoDict objectForKey:@"traveling"]);
+            */
+            
             [journeyList addObject:journeyInfoDict];
         }
         
         sqlite3_finalize(statement);
     }
     
-    NSLog(@"reload");
+    NSLog(@"PocketController: reload");
     // 用迴圈取得位於ViewController上的每一個UIView類別
     for (UIView *view in self.view.subviews) {
         // 判斷取得的view是否屬於UITableView類別

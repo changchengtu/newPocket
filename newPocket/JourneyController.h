@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AppDelegate.h"
 
 @interface JourneyController : UITabBarController
 {
     NSMutableDictionary *receiveJourney;
 }
 - (void) setJourneyState:(NSMutableDictionary *)state;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *editJourneyStateButton;
+
 @end
