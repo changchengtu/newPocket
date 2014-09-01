@@ -14,6 +14,7 @@
     NSMutableArray *journeyList;
     NSMutableDictionary *passJourney;
     NSMutableDictionary *journeyInfoDict;
+    sqlite3 *db;
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 

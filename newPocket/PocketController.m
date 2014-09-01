@@ -40,8 +40,22 @@
     journeyList = [[NSMutableArray alloc] init]; //List all journey on Pocket page
     
     // get the newest journey list
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"refresh" object:nil];
-
+    [self loadJourneyFromDB];
+    
+    
+    // if there is a journey onGoing, directly redirect to the journey
+    for(NSMutableDictionary *journey in journeyList) {
+        NSString *onGoing = [journey objectForKey:@"traveling"];
+        if ([onGoing isEqualToString:@"1"]) {
+            NSLog([journey objectForKey:@"name"]);
+            passJourney = [[NSMutableDictionary alloc] init];
+            [passJourney setObject:[journey objectForKey:@"name"] forKey:@"name"];
+            [passJourney setObject:onGoing forKey:@"onGoing"];
+            [passJourney setObject:[journey objectForKey:@"iid"] forKey:@"iid"];
+            [self performSegueWithIdentifier:@"showJourney" sender:self];
+            break;
+        }
+    }
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -84,11 +98,13 @@
         if (travelingCheck==yesCheck) {
             NSString *state = @"1";
             //NSLog(@"yes");
+            [passJourney setObject:[[journeyList objectAtIndex:indexPath.row] objectForKey:@"name"] forKey:@"name"];
             [passJourney setObject:state forKey:@"onGoing"];
             [passJourney setObject:[[journeyList objectAtIndex:indexPath.row] objectForKey:@"iid"] forKey:@"iid"];
         } else{
             //NSLog(@"no");
             NSString *state = @"0";
+            [passJourney setObject:[[journeyList objectAtIndex:indexPath.row] objectForKey:@"name"] forKey:@"name"];
             [passJourney setObject:state forKey:@"onGoing"];
             [passJourney setObject:[[journeyList objectAtIndex:indexPath.row] objectForKey:@"iid"] forKey:@"iid"];
         }
@@ -120,9 +136,27 @@
 // implement a reload tableview function
 -(void)ReloadDataFunction:(NSNotification *)notification {
     
+    [self loadJourneyFromDB];
+    
+    NSLog(@"PocketController: reload");
+    // 用迴圈取得位於ViewController上的每一個UIView類別
+    for (UIView *view in self.view.subviews) {
+        // 判斷取得的view是否屬於UITableView類別
+        if ([view isKindOfClass:[UITableView class]]) {
+            // 如果是就強制轉型為UITableView
+            UITableView *tableView = (UITableView *)view;
+            // 要求重新載入資料
+            [tableView reloadData];
+            break;
+        }
+    }
+    
+}
+
+-(void) loadJourneyFromDB {
     // 取得已開啓的資料庫連線變數
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    sqlite3 *db = [delegate getDB];
+    db = [delegate getDB];
     
     if (db != nil) {
         // 準備好查詢的SQL command
@@ -155,40 +189,33 @@
             [journeyInfoDict setObject:[NSString stringWithFormat:@"%s", profilepic, nil] forKey:@"profilepic"];
             [journeyInfoDict setObject:[NSString stringWithFormat:@"%s", traveling, nil] forKey:@"traveling"];
             
+            /*
+            NSString *asd = [NSString stringWithFormat:@"%s", traveling, nil];
+            if ([asd isEqualToString:@"1"]) {
+                NSLog(@"the journey is on");
+            }
+            */
+            
             // for test sqlite connection
             /*
-            NSLog([journeyInfoDict objectForKey:@"iid"]);
-            NSLog([journeyInfoDict objectForKey:@"name"]);
-            NSLog([journeyInfoDict objectForKey:@"country"]);
-            NSLog([journeyInfoDict objectForKey:@"city"]);
-            NSLog([journeyInfoDict objectForKey:@"start"]);
-            NSLog([journeyInfoDict objectForKey:@"end"]);
-            NSLog([journeyInfoDict objectForKey:@"description"]);
-            NSLog([journeyInfoDict objectForKey:@"profilepic"]);
-            NSLog([journeyInfoDict objectForKey:@"traveling"]);
-            */
+             NSLog([journeyInfoDict objectForKey:@"iid"]);
+             NSLog([journeyInfoDict objectForKey:@"name"]);
+             NSLog([journeyInfoDict objectForKey:@"country"]);
+             NSLog([journeyInfoDict objectForKey:@"city"]);
+             NSLog([journeyInfoDict objectForKey:@"start"]);
+             NSLog([journeyInfoDict objectForKey:@"end"]);
+             NSLog([journeyInfoDict objectForKey:@"description"]);
+             NSLog([journeyInfoDict objectForKey:@"profilepic"]);
+             NSLog([journeyInfoDict objectForKey:@"traveling"]);
+             */
             
             [journeyList addObject:journeyInfoDict];
         }
         
         sqlite3_finalize(statement);
     }
-    
-    NSLog(@"PocketController: reload");
-    // 用迴圈取得位於ViewController上的每一個UIView類別
-    for (UIView *view in self.view.subviews) {
-        // 判斷取得的view是否屬於UITableView類別
-        if ([view isKindOfClass:[UITableView class]]) {
-            // 如果是就強制轉型為UITableView
-            UITableView *tableView = (UITableView *)view;
-            // 要求重新載入資料
-            [tableView reloadData];
-            break;
-        }
-    }
-    
-}
 
+}
 
 /*
 #pragma mark - Navigation
