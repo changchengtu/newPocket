@@ -47,7 +47,10 @@
     }
 
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    // show journey name on title
+    self.navigationItem.title = [receiveJourney objectForKey:@"name"];
+    
 }
 
 - (void)didReceiveMemoryWarning
