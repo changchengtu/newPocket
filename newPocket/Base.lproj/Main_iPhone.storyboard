@@ -56,7 +56,11 @@
                                 <items>
                                     <barButtonItem title="Item" id="BVB-X4-kvF"/>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="ebQ-Wm-WKl"/>
-                                    <barButtonItem title="Item" systemItem="add" id="CB8-6w-BTu"/>
+                                    <barButtonItem title="Item" systemItem="add" id="CB8-6w-BTu">
+                                        <connections>
+                                            <segue destination="LjJ-Zl-XRK" kind="modal" id="Xmo-ue-aIY"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="CNZ-oq-ajv"/>
                                     <barButtonItem title="Item" id="xVu-ud-KB3"/>
                                 </items>
@@ -73,6 +77,89 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="388" y="-195"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Mky-FM-14v">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="LjJ-Zl-XRK" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="HPv-Bb-CAx">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="SjI-0m-uWm" kind="relationship" relationship="rootViewController" id="z1b-sx-AHr"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qaq-bq-e43" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="911" y="-401"/>
+        </scene>
+        <!--New Journey Controller - New Journey-->
+        <scene sceneID="QGl-tr-jzY">
+            <objects>
+                <viewController id="SjI-0m-uWm" customClass="NewJourneyController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="cmb-ab-OiY"/>
+                        <viewControllerLayoutGuide type="bottom" id="dHm-rY-cpR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="VNk-fK-AE5">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C5t-SE-u8Y">
+                                <rect key="frame" x="20" y="77" width="46" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Country" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fui-ax-YMz">
+                                <rect key="frame" x="20" y="144" width="61" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZTc-C3-bVn">
+                                <rect key="frame" x="20" y="211" width="77" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="+ company">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6vL-E4-oPH">
+                                <rect key="frame" x="20" y="106" width="280" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9bY-A3-dhI">
+                                <rect key="frame" x="20" y="173" width="280" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="New Journey" id="bGy-VD-dOx">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" systemItem="cancel" id="0dk-zJ-Ew0">
+                            <connections>
+                                <action selector="pressCancelButton:" destination="SjI-0m-uWm" id="aDC-Wx-iGw"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="icd-vQ-Bc7">
+                            <connections>
+                                <action selector="pressDownButton:" destination="SjI-0m-uWm" id="abr-Zr-m94"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="JourneyLocationField" destination="9bY-A3-dhI" id="DrP-Gw-yQ8"/>
+                        <outlet property="journeyNameField" destination="6vL-E4-oPH" id="oZO-vU-hZY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wTt-Vc-LgD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1338" y="-400"/>
         </scene>
         <!--View Controller - record-->
         <scene sceneID="AgG-gD-hx5">

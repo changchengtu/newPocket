@@ -29,6 +29,14 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    //initial a notification for reload tableview function
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(ReloadDataFunction:)
+                                                 name:@"refresh"
+                                               object:nil];
+
+    
     journeyList = [[NSMutableArray alloc] init]; //List all journey on Pocket page
     
     // 取得已開啓的資料庫連線變數
@@ -111,6 +119,7 @@
     passJourney = [[NSMutableDictionary alloc] init];
     
     
+    // to get if the journey is on going, and pass variable to next controller
     if (indexPath.row > -1)
 	{
         NSLog(@"check the journeyState");
@@ -136,7 +145,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    NSLog(@"segue from deals screen");
+    NSLog(@"do the segue");
     //addToCartViewContollerForItem
     if([[segue identifier] isEqualToString:@"showJourney"]){
         NSIndexPath *selectedRow = [[self tableView] indexPathForSelectedRow];
@@ -148,6 +157,66 @@
     
     
 }
+
+// implement a reload tableview function
+-(void)ReloadDataFunction:(NSNotification *)notification {
+    
+    // 取得已開啓的資料庫連線變數
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    sqlite3 *db = [delegate getDB];
+    
+    if (db != nil) {
+        // 準備好查詢的SQL command
+        const char *sql = "SELECT * FROM journey";
+        // statement用來儲存執行結果
+        sqlite3_stmt *statement;
+        sqlite3_prepare(db, sql, -1, &statement, NULL);
+        [journeyList removeAllObjects];
+        
+        // 利用迴圈取出查詢結果
+        while (sqlite3_step(statement) == SQLITE_ROW) {
+            char *iid = (char *)sqlite3_column_text(statement, 0);
+            char *name = (char *)sqlite3_column_text(statement, 1);
+            char *country = (char *)sqlite3_column_text(statement, 2);
+            char *city = (char *)sqlite3_column_text(statement, 3);
+            char *start = (char *)sqlite3_column_text(statement, 4);
+            char *end = (char *)sqlite3_column_text(statement, 5);
+            char *description = (char *)sqlite3_column_text(statement, 6);
+            char *profilepic = (char *)sqlite3_column_text(statement, 7);
+            char *traveling = (char *)sqlite3_column_text(statement, 8);
+            
+            journeyInfoDict = [[NSMutableDictionary alloc] init];
+            [journeyInfoDict setObject:[NSString stringWithFormat:@"%s", iid, nil] forKey:@"iid"];
+            [journeyInfoDict setObject:[NSString stringWithFormat:@"%s", name, nil] forKey:@"name"];
+            [journeyInfoDict setObject:[NSString stringWithFormat:@"%s", country, nil] forKey:@"country"];
+            [journeyInfoDict setObject:[NSString stringWithFormat:@"%s", city, nil] forKey:@"city"];
+            [journeyInfoDict setObject:[NSString stringWithFormat:@"%s", start, nil] forKey:@"start"];
+            [journeyInfoDict setObject:[NSString stringWithFormat:@"%s", end, nil] forKey:@"end"];
+            [journeyInfoDict setObject:[NSString stringWithFormat:@"%s", description, nil] forKey:@"description"];
+            [journeyInfoDict setObject:[NSString stringWithFormat:@"%s", profilepic, nil] forKey:@"profilepic"];
+            [journeyInfoDict setObject:[NSString stringWithFormat:@"%s", traveling, nil] forKey:@"traveling"];
+            
+            [journeyList addObject:journeyInfoDict];
+        }
+        
+        sqlite3_finalize(statement);
+    }
+    
+    NSLog(@"reload");
+    // 用迴圈取得位於ViewController上的每一個UIView類別
+    for (UIView *view in self.view.subviews) {
+        // 判斷取得的view是否屬於UITableView類別
+        if ([view isKindOfClass:[UITableView class]]) {
+            // 如果是就強制轉型為UITableView
+            UITableView *tableView = (UITableView *)view;
+            // 要求重新載入資料
+            [tableView reloadData];
+            break;
+        }
+    }
+    
+}
+
 
 /*
 #pragma mark - Navigation

@@ -26,6 +26,7 @@
 		6A115FC719B3464C00815C2A /* JourneyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A115FC619B3464C00815C2A /* JourneyController.m */; };
 		6A115FC919B35D3000815C2A /* pocket.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 6A115FC819B35D3000815C2A /* pocket.sqlite */; };
 		6A115FCB19B35D3C00815C2A /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A115FCA19B35D3C00815C2A /* libsqlite3.dylib */; };
+		6A9BD2F719B40AE000354B28 /* NewJourneyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A9BD2F619B40AE000354B28 /* NewJourneyController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,8 @@
 		6A115FC619B3464C00815C2A /* JourneyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JourneyController.m; sourceTree = "<group>"; };
 		6A115FC819B35D3000815C2A /* pocket.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = pocket.sqlite; sourceTree = "<group>"; };
 		6A115FCA19B35D3C00815C2A /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		6A9BD2F519B40AE000354B28 /* NewJourneyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewJourneyController.h; sourceTree = "<group>"; };
+		6A9BD2F619B40AE000354B28 /* NewJourneyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewJourneyController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +135,8 @@
 				6A115F9F19B3444F00815C2A /* Main_iPad.storyboard */,
 				6A115FC219B344B700815C2A /* PocketController.h */,
 				6A115FC319B344B700815C2A /* PocketController.m */,
+				6A9BD2F519B40AE000354B28 /* NewJourneyController.h */,
+				6A9BD2F619B40AE000354B28 /* NewJourneyController.m */,
 				6A115FC519B3464C00815C2A /* JourneyController.h */,
 				6A115FC619B3464C00815C2A /* JourneyController.m */,
 				6A115FA219B3444F00815C2A /* ViewController.h */,
@@ -274,6 +279,7 @@
 				6A115FA419B3444F00815C2A /* ViewController.m in Sources */,
 				6A115F9B19B3444F00815C2A /* AppDelegate.m in Sources */,
 				6A115FC719B3464C00815C2A /* JourneyController.m in Sources */,
+				6A9BD2F719B40AE000354B28 /* NewJourneyController.m in Sources */,
 				6A115F9719B3444F00815C2A /* main.m in Sources */,
 				6A115FC419B344B700815C2A /* PocketController.m in Sources */,
 			);
