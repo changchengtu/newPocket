@@ -26,7 +26,9 @@
 		6A115FC719B3464C00815C2A /* JourneyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A115FC619B3464C00815C2A /* JourneyController.m */; };
 		6A115FC919B35D3000815C2A /* pocket.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 6A115FC819B35D3000815C2A /* pocket.sqlite */; };
 		6A115FCB19B35D3C00815C2A /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A115FCA19B35D3C00815C2A /* libsqlite3.dylib */; };
+		6A528FE819B5D0F800D7853B /* TimelineController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A528FE719B5D0F800D7853B /* TimelineController.m */; };
 		6A9BD2F719B40AE000354B28 /* NewJourneyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A9BD2F619B40AE000354B28 /* NewJourneyController.m */; };
+		6AAC91E919B5F09000CB5240 /* sample.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6AAC91E819B5F09000CB5240 /* sample.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,8 +68,11 @@
 		6A115FC619B3464C00815C2A /* JourneyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JourneyController.m; sourceTree = "<group>"; };
 		6A115FC819B35D3000815C2A /* pocket.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = pocket.sqlite; sourceTree = "<group>"; };
 		6A115FCA19B35D3C00815C2A /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		6A528FE619B5D0F700D7853B /* TimelineController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimelineController.h; sourceTree = "<group>"; };
+		6A528FE719B5D0F800D7853B /* TimelineController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimelineController.m; sourceTree = "<group>"; };
 		6A9BD2F519B40AE000354B28 /* NewJourneyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewJourneyController.h; sourceTree = "<group>"; };
 		6A9BD2F619B40AE000354B28 /* NewJourneyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewJourneyController.m; sourceTree = "<group>"; };
+		6AAC91E819B5F09000CB5240 /* sample.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sample.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +134,7 @@
 		6A115F9019B3444F00815C2A /* newPocket */ = {
 			isa = PBXGroup;
 			children = (
+				6AAC91E819B5F09000CB5240 /* sample.jpg */,
 				6A115F9919B3444F00815C2A /* AppDelegate.h */,
 				6A115F9A19B3444F00815C2A /* AppDelegate.m */,
 				6A115F9C19B3444F00815C2A /* Main_iPhone.storyboard */,
@@ -137,6 +143,8 @@
 				6A115FC319B344B700815C2A /* PocketController.m */,
 				6A9BD2F519B40AE000354B28 /* NewJourneyController.h */,
 				6A9BD2F619B40AE000354B28 /* NewJourneyController.m */,
+				6A528FE619B5D0F700D7853B /* TimelineController.h */,
+				6A528FE719B5D0F800D7853B /* TimelineController.m */,
 				6A115FC519B3464C00815C2A /* JourneyController.h */,
 				6A115FC619B3464C00815C2A /* JourneyController.m */,
 				6A115FA219B3444F00815C2A /* ViewController.h */,
@@ -254,6 +262,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6A115FA119B3444F00815C2A /* Main_iPad.storyboard in Resources */,
+				6AAC91E919B5F09000CB5240 /* sample.jpg in Resources */,
 				6A115FC919B35D3000815C2A /* pocket.sqlite in Resources */,
 				6A115FA619B3444F00815C2A /* Images.xcassets in Resources */,
 				6A115F9E19B3444F00815C2A /* Main_iPhone.storyboard in Resources */,
@@ -278,6 +287,7 @@
 			files = (
 				6A115FA419B3444F00815C2A /* ViewController.m in Sources */,
 				6A115F9B19B3444F00815C2A /* AppDelegate.m in Sources */,
+				6A528FE819B5D0F800D7853B /* TimelineController.m in Sources */,
 				6A115FC719B3464C00815C2A /* JourneyController.m in Sources */,
 				6A9BD2F719B40AE000354B28 /* NewJourneyController.m in Sources */,
 				6A115F9719B3444F00815C2A /* main.m in Sources */,

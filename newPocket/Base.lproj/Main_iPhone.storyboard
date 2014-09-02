@@ -207,10 +207,10 @@
             </objects>
             <point key="canvasLocation" x="951" y="374"/>
         </scene>
-        <!--View Controller - timeline-->
+        <!--Timeline Controller - timeline-->
         <scene sceneID="9O8-wM-PM3">
             <objects>
-                <viewController id="BHe-du-jIg" sceneMemberID="viewController">
+                <viewController id="BHe-du-jIg" customClass="TimelineController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="f0J-1C-6RA"/>
                         <viewControllerLayoutGuide type="bottom" id="1Xq-Na-Mg3"/>
@@ -218,6 +218,26 @@
                     <view key="view" contentMode="scaleToFill" id="XXd-9o-gkV">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="195" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="RmZ-kX-RKj">
+                                <rect key="frame" x="0.0" y="64" width="320" height="366"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="200" id="ekd-c7-3Rh">
+                                        <rect key="frame" x="0.0" y="86" width="320" height="200"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ekd-c7-3Rh" id="ujS-JA-YTz">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="199"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="BHe-du-jIg" id="utr-Sc-ToJ"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="timeline" id="gVS-hW-2Wz"/>

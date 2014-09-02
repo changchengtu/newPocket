@@ -7,6 +7,7 @@
 //
 
 #import "JourneyController.h"
+#import "JourneyController.h"
 
 @interface JourneyController ()
 
