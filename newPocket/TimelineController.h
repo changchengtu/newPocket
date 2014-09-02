@@ -12,6 +12,7 @@
 {
     NSMutableArray *mediaList;
     UIImageView *media;
+    
 }
 
 @end
