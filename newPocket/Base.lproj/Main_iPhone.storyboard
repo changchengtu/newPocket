@@ -161,10 +161,10 @@
             </objects>
             <point key="canvasLocation" x="1338" y="-400"/>
         </scene>
-        <!--View Controller - record-->
+        <!--Record Controller - record-->
         <scene sceneID="AgG-gD-hx5">
             <objects>
-                <viewController id="Tdm-V2-oX1" sceneMemberID="viewController">
+                <viewController id="Tdm-V2-oX1" customClass="RecordController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Hap-Jb-gac"/>
                         <viewControllerLayoutGuide type="bottom" id="w78-jE-OO7"/>
@@ -172,9 +172,29 @@
                     <view key="view" contentMode="scaleToFill" id="xzi-1V-2Of">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jtB-KD-0Gd">
+                                <rect key="frame" x="0.0" y="68" width="320" height="356"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="open camera">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="clickStartCameraButton:" destination="Tdm-V2-oX1" eventType="touchUpInside" id="0Of-38-MdJ"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TuQ-gT-adN">
+                                <rect key="frame" x="48" y="76" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="record" id="ZB8-Wp-Dt6"/>
+                    <connections>
+                        <outlet property="showMedia" destination="TuQ-gT-adN" id="n0t-jJ-a7J"/>
+                        <outlet property="startCameraButton" destination="jtB-KD-0Gd" id="yRP-j2-bUU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DyC-95-JFd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

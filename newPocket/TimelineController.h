@@ -7,6 +7,8 @@
 //
 #import <UIKit/UIKit.h>
 #import "ViewController.h"
+#import "AssetsLibrary/AssetsLibrary.h"
+
 
 @interface TimelineController : ViewController
 {

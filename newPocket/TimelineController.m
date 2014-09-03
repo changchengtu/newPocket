@@ -37,6 +37,26 @@
     UIImageView *media = [[UIImageView alloc]initWithFrame:CGRectMake(0, 20, 320, 180)];
     media.contentMode = UIViewContentModeScaleToFill;
     media.image = [UIImage imageNamed:[[mediaList objectAtIndex:indexPath.row] objectForKey:@"path"]];
+    
+    /*
+    ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+    ALAsset *assetURL;
+    
+    [library assetForURL:assetURL resultBlock:^(ALAsset *asset )
+     {
+         NSLog(@"we have our ALAsset!");
+         ALAssetRepresentation *rep = [asset defaultRepresentation];
+         CGImageRef iref = [rep fullResolutionImage];
+         if (iref) {
+             UIImage *largeimage = [UIImage imageWithCGImage:iref];
+             
+         }
+     } failureBlock:^(NSError *error )
+     {
+         NSLog(@"Error loading asset");
+     }];
+    */
+    
     [cell.contentView addSubview:media];
     
     
