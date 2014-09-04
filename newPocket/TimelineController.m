@@ -36,13 +36,19 @@
     // show media, each cell has its own media
     UIImageView *media = [[UIImageView alloc]initWithFrame:CGRectMake(0, 20, 320, 180)];
     //media.contentMode = UIViewContentModeScaleToFill;
-    //media.image = [UIImage imageNamed:[[mediaList objectAtIndex:indexPath.row] objectForKey:@"path"]];
+    
+    // show thumbnail
+    NSData *thumbnailData = [NSData dataWithContentsOfFile:[[mediaList objectAtIndex:indexPath.row] objectForKey:@"thumbnail_path"]];
+    media.image = [UIImage imageWithData:thumbnailData];
     
     
+    // show original picture
+    /*
     ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
     //NSURL *url = [NSURL URLWithString:@"assets-library://asset/asset.JPG?id=FF014D89-29E6-42A4-AC78-07E6A9DD0793&ext=JPG"];
     NSURL *url;
-    ALAsset *assetURL=[NSURL URLWithString:[[mediaList objectAtIndex:indexPath.row] objectForKey:@"path"]];
+    
+    ALAsset *assetURL=[NSURL URLWithString:[[mediaList objectAtIndex:indexPath.row] objectForKey:@"thumbnail_path"]];
     
     [library assetForURL:assetURL resultBlock:^(ALAsset *asset )
      {
@@ -58,7 +64,7 @@
      {
          NSLog(@"Error loading asset");
      }];
-    
+    */
     
     [cell.contentView addSubview:media];
     
@@ -86,8 +92,6 @@
                                              selector:@selector(ReloadMediaFunction:)
                                                  name:@"refreshMedia"
                                                object:nil];
-    
-    mediaList = [[NSMutableArray alloc] init];
     
     [self loadMediaFromDB];
     
@@ -138,6 +142,8 @@
 
 - (void)loadMediaFromDB
 {
+    
+    mediaList = [[NSMutableArray alloc] init];
     // 取得已開啓的資料庫連線變數
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     sqlite3 *db = [delegate getDB];
@@ -156,20 +162,13 @@
             
             char *time = (char *)sqlite3_column_text(statement, 3);
             char *location = (char *)sqlite3_column_text(statement, 4);
-            char *path = (char *)sqlite3_column_text(statement, 5);
+            char *thumbnail_path = (char *)sqlite3_column_text(statement, 6);
             
             NSMutableDictionary *mediaInfo = [[NSMutableDictionary alloc] init];
-            [mediaInfo setObject:[NSString stringWithFormat:@"%s", path, nil] forKey:@"path"];
+            [mediaInfo setObject:[NSString stringWithFormat:@"%s", thumbnail_path, nil] forKey:@"thumbnail_path"];
             [mediaInfo setObject:[NSString stringWithFormat:@"%s", time, nil] forKey:@"title"];
             [mediaList addObject:mediaInfo];
             
-        }
-        
-        // 檢查插入資料是否成功
-        if (sqlite3_step(statement) == SQLITE_DONE) {
-            NSLog(@"TimelineController: 成功取得圖片");
-        } else {
-            NSLog(@"TimelineController: 圖片取得失敗");
         }
         
         sqlite3_finalize(statement);

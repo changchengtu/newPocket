@@ -42,7 +42,7 @@
     // get the newest journey list
     [self loadJourneyFromDB];
     
-    /* do not uncomment this function because it will lead to layout problem
+    
     // if there is a journey onGoing, directly redirect to the journey
     for(NSMutableDictionary *journey in journeyList) {
         NSString *onGoing = [journey objectForKey:@"traveling"];
@@ -56,7 +56,7 @@
             break;
         }
     }
-     */
+     
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
