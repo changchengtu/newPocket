@@ -82,7 +82,7 @@
         
         if (db != nil) {
             // 準備好查詢的SQL command
-            updateSQL = [NSString stringWithFormat:@"UPDATE journey SET traveling=0 WHERE ID=%d;", (int *)iidInt];
+            updateSQL = [NSString stringWithFormat:@"UPDATE journeys SET traveling=0 WHERE ID=%d;", (int *)iidInt];
         }
         
     } else{
@@ -90,7 +90,7 @@
         
         if (db != nil) {
             // 準備好查詢的SQL command
-            updateSQL = [NSString stringWithFormat:@"UPDATE journey SET traveling=1 WHERE ID=%d;", (int *)iidInt];
+            updateSQL = [NSString stringWithFormat:@"UPDATE journeys SET traveling=1 WHERE ID=%d;", (int *)iidInt];
             
         }
         

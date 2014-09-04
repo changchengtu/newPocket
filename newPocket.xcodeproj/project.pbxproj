@@ -24,9 +24,9 @@
 		6A115FB919B3444F00815C2A /* newPocketTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A115FB819B3444F00815C2A /* newPocketTests.m */; };
 		6A115FC419B344B700815C2A /* PocketController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A115FC319B344B700815C2A /* PocketController.m */; };
 		6A115FC719B3464C00815C2A /* JourneyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A115FC619B3464C00815C2A /* JourneyController.m */; };
-		6A115FC919B35D3000815C2A /* pocket.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 6A115FC819B35D3000815C2A /* pocket.sqlite */; };
 		6A115FCB19B35D3C00815C2A /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A115FCA19B35D3C00815C2A /* libsqlite3.dylib */; };
 		6A528FE819B5D0F800D7853B /* TimelineController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A528FE719B5D0F800D7853B /* TimelineController.m */; };
+		6A6369FA19B8468400BFC695 /* pocket.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 6A6369F919B8468400BFC695 /* pocket.sqlite */; };
 		6A9BD2F719B40AE000354B28 /* NewJourneyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A9BD2F619B40AE000354B28 /* NewJourneyController.m */; };
 		6AB0BC7F19B6B241008B538B /* RecordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB0BC7E19B6B241008B538B /* RecordController.m */; };
 		6ADF8EB719B617F000758A31 /* sample1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6ADF8EB319B617F000758A31 /* sample1.jpg */; };
@@ -70,10 +70,10 @@
 		6A115FC319B344B700815C2A /* PocketController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PocketController.m; sourceTree = "<group>"; };
 		6A115FC519B3464C00815C2A /* JourneyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JourneyController.h; sourceTree = "<group>"; };
 		6A115FC619B3464C00815C2A /* JourneyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JourneyController.m; sourceTree = "<group>"; };
-		6A115FC819B35D3000815C2A /* pocket.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = pocket.sqlite; sourceTree = "<group>"; };
 		6A115FCA19B35D3C00815C2A /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		6A528FE619B5D0F700D7853B /* TimelineController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimelineController.h; sourceTree = "<group>"; };
 		6A528FE719B5D0F800D7853B /* TimelineController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimelineController.m; sourceTree = "<group>"; };
+		6A6369F919B8468400BFC695 /* pocket.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = pocket.sqlite; path = newPocket/pocket.sqlite; sourceTree = "<group>"; };
 		6A9BD2F519B40AE000354B28 /* NewJourneyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewJourneyController.h; sourceTree = "<group>"; };
 		6A9BD2F619B40AE000354B28 /* NewJourneyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewJourneyController.m; sourceTree = "<group>"; };
 		6AB0BC7D19B6B241008B538B /* RecordController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordController.h; sourceTree = "<group>"; };
@@ -112,6 +112,7 @@
 		6A115F7E19B3444F00815C2A = {
 			isa = PBXGroup;
 			children = (
+				6A6369F919B8468400BFC695 /* pocket.sqlite */,
 				6A115F9019B3444F00815C2A /* newPocket */,
 				6A115FB219B3444F00815C2A /* newPocketTests */,
 				6A115F8919B3444F00815C2A /* Frameworks */,
@@ -172,7 +173,6 @@
 		6A115F9119B3444F00815C2A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				6A115FC819B35D3000815C2A /* pocket.sqlite */,
 				6A115F9219B3444F00815C2A /* newPocket-Info.plist */,
 				6A115F9319B3444F00815C2A /* InfoPlist.strings */,
 				6A115F9619B3444F00815C2A /* main.m */,
@@ -276,11 +276,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				6A115FA119B3444F00815C2A /* Main_iPad.storyboard in Resources */,
-				6A115FC919B35D3000815C2A /* pocket.sqlite in Resources */,
 				6A115FA619B3444F00815C2A /* Images.xcassets in Resources */,
 				6A115F9E19B3444F00815C2A /* Main_iPhone.storyboard in Resources */,
 				6A115F9519B3444F00815C2A /* InfoPlist.strings in Resources */,
 				6ADF8EB719B617F000758A31 /* sample1.jpg in Resources */,
+				6A6369FA19B8468400BFC695 /* pocket.sqlite in Resources */,
 				6ADF8EB819B617F000758A31 /* sample2.jpg in Resources */,
 				6ADF8EB919B617F000758A31 /* sample3.jpg in Resources */,
 				6ADF8EBA19B617F000758A31 /* sample4.jpg in Resources */,

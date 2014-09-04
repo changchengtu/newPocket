@@ -161,7 +161,7 @@
     
     if (db != nil) {
         // 準備好查詢的SQL command
-        const char *sql = "SELECT * FROM journey";
+        const char *sql = "SELECT * FROM journeys";
         // statement用來儲存執行結果
         sqlite3_stmt *statement;
         sqlite3_prepare(db, sql, -1, &statement, NULL);

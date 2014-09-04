@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "AssetsLibrary/AssetsLibrary.h"
+#import "AppDelegate.h"
 
 @interface RecordController : ViewController
 

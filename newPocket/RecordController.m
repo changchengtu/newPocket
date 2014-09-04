@@ -61,7 +61,38 @@
              NSLog(@"IMAGE SAVED TO PHOTO ALBUM");
              [library assetForURL:assetURL resultBlock:^(ALAsset *asset )
               {
-                  NSLog(@"we have our ALAsset!");
+                  NSLog(@"RecordController: ALAsset located!");
+                  NSLog(@"RecordController: path= %@", [asset valueForProperty:ALAssetPropertyAssetURL]);
+                  
+                  // 取得已開啓的資料庫連線變數
+                  AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+                  sqlite3 *db = [delegate getDB];
+                  
+                  if (db != nil) {
+                      // 準備好查詢的SQL command
+                      NSString *queryString = [NSString stringWithFormat:@"insert into medias values(NULL, NULL, 'picture', '2014-01-01 10:00:00', 'Bali', '%@', NULL, 1)", [asset valueForProperty:ALAssetPropertyAssetURL]];
+                      const char *sql = [queryString UTF8String];
+                      
+                      sqlite3_stmt *statement;
+                      // 執行
+                      sqlite3_prepare(db, sql, -1, &statement, NULL);
+                      // statement用來儲存執行結果
+                      
+                      while (sqlite3_step(statement) == SQLITE_ROW) {
+                      }
+                      
+                      // 檢查插入資料是否成功
+                      if (sqlite3_step(statement) == SQLITE_DONE) {
+                          NSLog(@"TimelineController: picture path save to database");
+                      } else {
+                          NSLog(@"TimelineController: picture saving failed");
+                      }
+                      
+                      sqlite3_finalize(statement);
+                  }
+                  
+                  
+                  
                   ALAssetRepresentation *rep = [asset defaultRepresentation];
                   CGImageRef iref = [rep fullResolutionImage];
                   if (iref) {
