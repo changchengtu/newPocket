@@ -73,7 +73,7 @@
 		6A115FCA19B35D3C00815C2A /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		6A528FE619B5D0F700D7853B /* TimelineController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimelineController.h; sourceTree = "<group>"; };
 		6A528FE719B5D0F800D7853B /* TimelineController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimelineController.m; sourceTree = "<group>"; };
-		6A6369F919B8468400BFC695 /* pocket.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = pocket.sqlite; path = newPocket/pocket.sqlite; sourceTree = "<group>"; };
+		6A6369F919B8468400BFC695 /* pocket.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = pocket.sqlite; sourceTree = "<group>"; };
 		6A9BD2F519B40AE000354B28 /* NewJourneyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewJourneyController.h; sourceTree = "<group>"; };
 		6A9BD2F619B40AE000354B28 /* NewJourneyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewJourneyController.m; sourceTree = "<group>"; };
 		6AB0BC7D19B6B241008B538B /* RecordController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordController.h; sourceTree = "<group>"; };
@@ -112,7 +112,6 @@
 		6A115F7E19B3444F00815C2A = {
 			isa = PBXGroup;
 			children = (
-				6A6369F919B8468400BFC695 /* pocket.sqlite */,
 				6A115F9019B3444F00815C2A /* newPocket */,
 				6A115FB219B3444F00815C2A /* newPocketTests */,
 				6A115F8919B3444F00815C2A /* Frameworks */,
@@ -173,6 +172,7 @@
 		6A115F9119B3444F00815C2A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6A6369F919B8468400BFC695 /* pocket.sqlite */,
 				6A115F9219B3444F00815C2A /* newPocket-Info.plist */,
 				6A115F9319B3444F00815C2A /* InfoPlist.strings */,
 				6A115F9619B3444F00815C2A /* main.m */,

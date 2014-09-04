@@ -61,7 +61,7 @@
     }
     
     // reload tableview in ViewController
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"refresh" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshJourney" object:nil];
     [self dismissViewControllerAnimated:YES completion:^{}];
 }
 - (IBAction)pressCancelButton:(id)sender {

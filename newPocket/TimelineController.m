@@ -50,8 +50,9 @@
          ALAssetRepresentation *rep = [asset defaultRepresentation];
          CGImageRef iref = [rep fullResolutionImage];
          if (iref) {
-             UIImage *largeimage = [UIImage imageWithCGImage:iref]; //the image should be compress or memroy warning
-             media.image = largeimage;
+             UIImage *original = [UIImage imageWithCGImage:iref]; //the image should be compress or memroy warning
+             UIImage *small = [UIImage imageWithCGImage:original.CGImage scale:0.01 orientation:original.imageOrientation];
+             media.image = small;
          }
      } failureBlock:^(NSError *error )
      {
@@ -80,8 +81,63 @@
     // Do any additional setup after loading the view.
     NSLog(@"TimelineController: viewDidLoad");
     
+    //initial a notification for reload tableview function
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(ReloadMediaFunction:)
+                                                 name:@"refreshMedia"
+                                               object:nil];
+    
     mediaList = [[NSMutableArray alloc] init];
     
+    [self loadMediaFromDB];
+    
+    /*
+    // please load camera here
+    // init 4 medias and save to mediaList for later presenting in cell
+    NSMutableDictionary *mediaInfo1 = [[NSMutableDictionary alloc] init];
+    [mediaInfo1 setObject:@"sample1.jpg" forKey:@"path"];
+    [mediaInfo1 setObject:@"3/23 7pm at Taoyuan Taiwan" forKey:@"title"];
+    [mediaList addObject:mediaInfo1];
+    
+    NSMutableDictionary *mediaInfo2 = [[NSMutableDictionary alloc] init];
+    [mediaInfo2 setObject:@"sample2.jpg" forKey:@"path"];
+    [mediaInfo2 setObject:@"3/23 10pm at Hsinchu Taiwan" forKey:@"title"];
+    [mediaList addObject:mediaInfo2];
+    
+    NSMutableDictionary *mediaInfo3 = [[NSMutableDictionary alloc] init];
+    [mediaInfo3 setObject:@"sample3.jpg" forKey:@"path"];
+    [mediaInfo3 setObject:@"3/24 8am at Hsinchu Taiwan" forKey:@"title"];
+    [mediaList addObject:mediaInfo3];
+    
+    NSMutableDictionary *mediaInfo4 = [[NSMutableDictionary alloc] init];
+    [mediaInfo4 setObject:@"sample4.jpg" forKey:@"path"];
+    [mediaInfo4 setObject:@"3/24 1pm at Taiper Taiwan" forKey:@"title"];
+    [mediaList addObject:mediaInfo4];
+    */
+    
+}
+
+-(void)ReloadMediaFunction:(NSNotification *)notification {
+    
+    [self loadMediaFromDB];
+    
+    NSLog(@"RecordController: reload");
+    // 用迴圈取得位於ViewController上的每一個UIView類別
+    for (UIView *view in self.view.subviews) {
+        // 判斷取得的view是否屬於UITableView類別
+        if ([view isKindOfClass:[UITableView class]]) {
+            // 如果是就強制轉型為UITableView
+            UITableView *tableView = (UITableView *)view;
+            // 要求重新載入資料
+            [tableView reloadData];
+            break;
+        }
+    }
+    
+}
+
+- (void)loadMediaFromDB
+{
     // 取得已開啓的資料庫連線變數
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     sqlite3 *db = [delegate getDB];
@@ -111,38 +167,13 @@
         
         // 檢查插入資料是否成功
         if (sqlite3_step(statement) == SQLITE_DONE) {
-            NSLog(@"NewJourneyController: 成功插入一筆資料");
+            NSLog(@"TimelineController: 成功取得圖片");
         } else {
-            NSLog(@"NewJourneyController: 插入一筆資料失敗");
+            NSLog(@"TimelineController: 圖片取得失敗");
         }
         
         sqlite3_finalize(statement);
     }
-    
-    /*
-    // please load camera here
-    // init 4 medias and save to mediaList for later presenting in cell
-    NSMutableDictionary *mediaInfo1 = [[NSMutableDictionary alloc] init];
-    [mediaInfo1 setObject:@"sample1.jpg" forKey:@"path"];
-    [mediaInfo1 setObject:@"3/23 7pm at Taoyuan Taiwan" forKey:@"title"];
-    [mediaList addObject:mediaInfo1];
-    
-    NSMutableDictionary *mediaInfo2 = [[NSMutableDictionary alloc] init];
-    [mediaInfo2 setObject:@"sample2.jpg" forKey:@"path"];
-    [mediaInfo2 setObject:@"3/23 10pm at Hsinchu Taiwan" forKey:@"title"];
-    [mediaList addObject:mediaInfo2];
-    
-    NSMutableDictionary *mediaInfo3 = [[NSMutableDictionary alloc] init];
-    [mediaInfo3 setObject:@"sample3.jpg" forKey:@"path"];
-    [mediaInfo3 setObject:@"3/24 8am at Hsinchu Taiwan" forKey:@"title"];
-    [mediaList addObject:mediaInfo3];
-    
-    NSMutableDictionary *mediaInfo4 = [[NSMutableDictionary alloc] init];
-    [mediaInfo4 setObject:@"sample4.jpg" forKey:@"path"];
-    [mediaInfo4 setObject:@"3/24 1pm at Taiper Taiwan" forKey:@"title"];
-    [mediaList addObject:mediaInfo4];
-    */
-    
 
 }
 

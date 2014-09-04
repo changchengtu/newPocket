@@ -90,7 +90,7 @@
                       
                       sqlite3_finalize(statement);
                   }
-                  
+                  [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshMedia" object:nil];
                   
                   
                   ALAssetRepresentation *rep = [asset defaultRepresentation];

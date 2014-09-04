@@ -32,8 +32,8 @@
     
     //initial a notification for reload tableview function
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(ReloadDataFunction:)
-                                                 name:@"refresh"
+                                             selector:@selector(ReloadJourneyFunction:)
+                                                 name:@"refreshJourney"
                                                object:nil];
 
     
@@ -135,7 +135,7 @@
 }
 
 // implement a reload tableview function
--(void)ReloadDataFunction:(NSNotification *)notification {
+-(void)ReloadJourneyFunction:(NSNotification *)notification {
     
     [self loadJourneyFromDB];
     
